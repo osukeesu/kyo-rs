@@ -26,7 +26,7 @@ function updateData() {
     );
 }
 
-function connectShiro() {
+function connectKeesu() {
     invokeBackend(
         {
             cmd: "connect",
@@ -63,18 +63,18 @@ function toggleConnectButton() {
     connectButton.classList.toggle("pink");
     connectButton.classList.toggle("blue");
 
-    // We just switched to Shiro
+    // We just switched to Keesu
     if (connectButton.classList.contains("blue")) {
-        document.getElementById("text-connect").innerHTML = "Switch to Bancho";
+        document.getElementById("text-connect").innerHTML = "Bancho에 접속하기";
         document.getElementById("icon-switch").className = "fas fa-unlink";
         connectButton.onclick = connectBancho;
     }
 
     // We just switched back to Bancho
     if (connectButton.classList.contains("pink")) {
-        document.getElementById("text-connect").innerHTML = "Switch to Shiro";
+        document.getElementById("text-connect").innerHTML = "Keesu로 접속하기";
         document.getElementById("icon-switch").className = "fas fa-sync-alt";
-        connectButton.onclick = connectShiro;
+        connectButton.onclick = connectKeesu;
     }
 }
 

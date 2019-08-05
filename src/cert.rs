@@ -25,7 +25,7 @@ use std::io::Read;
 pub fn install_cert() {
     std::thread::spawn(move || {
         if download_cert() {
-            super::utils::send_notify("Certificate has been successfully installed.");
+            super::utils::send_notify("인증서가 성공적으로 설치되었습니다.");
         }
     });
 }
@@ -35,14 +35,14 @@ fn download_cert() -> bool {
 
     if !response.status().is_success() {
         super::utils::send_notify(format!(
-            "Certificate could not be downloaded. Remote server returned {}.", response.status()
+            "인증서를 다운로드 할 수 없습니다. 서버가 {}를 반환했습니다.", response.status()
         ).as_str());
 
         return false;
     }
 
     let mut content = String::new();
-    response.read_to_string(&mut content).expect("Unable to read response.");
+    response.read_to_string(&mut content).expect("서버로부터 응답을 받을 수 없습니다.");
 
     super::utils::install_cert(content.as_str());
 

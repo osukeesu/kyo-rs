@@ -34,15 +34,15 @@ use platform_utils::win32 as utils;
 #[cfg(unix)]
 use platform_utils::nix as utils;
 
-static SHIRO_IP: &'static str = r#"209.97.182.162"#;
-static MIRROR_IP: &'static str = r#"209.97.182.162"#; // Won't be displayed to user but put in hosts regardless
-static CERT_URL: &'static str = r#"https://shiro.host/cert.pem"#;
-static RESULT_CERT_NAME: &'static str = r#"shiro.crt"#; // Always needs to end in .crt
+static KEESU_IP: &'static str = r#"127.0.0.1"#;
+static MIRROR_IP: &'static str = r#"127.0.0.1"#; // Won't be displayed to user but put in hosts regardless
+static CERT_URL: &'static str = r#"https://cert.leu.kr/cert.pem"#;
+static RESULT_CERT_NAME: &'static str = r#"keesu.crt"#; // Always needs to end in .crt
 static CONTENT: &'static str = include_str!("../resources/index.include.html");
 
 fn main() {
     if !utils::is_root() {
-        utils::send_notify("Please run this program with elevated permissions. (Administrator or root)");
+        utils::send_notify("이 실행기를 관리자 권한으로 실행해주세요.");
         std::process::exit(1);
     }
 
@@ -63,7 +63,7 @@ fn main() {
             match cmd {
                 "update" => {
                     let connected = hosts::is_connected();
-                    let connect_address = format!("document.getElementById('connect-address').value = '{}';", SHIRO_IP);
+                    let connect_address = format!("document.getElementById('connect-address').value = '{}';", KEESU_IP);
                     let button_changer = if connected { "toggleConnectButton();" } else { "" };
 
                     let js = &format!("{}{}", connect_address, button_changer);

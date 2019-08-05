@@ -34,7 +34,7 @@ pub fn install_cert(cert: &str) {
     let result_path = std::path::Path::new(&fmt_path);
 
     if result_path.exists() {
-        send_notify("The certificate has already been installed.");
+        send_notify("이미 인증서가 설치되어있습니다.");
         return;
     }
 
@@ -54,8 +54,8 @@ pub fn install_cert(cert: &str) {
 
 pub fn send_notify(msg: &str) {
     notify_rust::Notification::new()
-        .appname("kyo-rs")
-        .summary("kyo-rs")
+        .appname("Keesu Server Switcher")
+        .summary("Keesu Server Switcher")
         .body(msg)
         .auto_icon()
         .show()

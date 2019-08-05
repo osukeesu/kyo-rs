@@ -62,14 +62,14 @@ pub fn install_cert(cert: &str) {
     let path = file.as_path();
     let path_str = path.to_str().unwrap();
 
-    std::fs::write(path, cert).expect("Unable to write certificate to disk.");
+    std::fs::write(path, cert).expect("디스크에 인증서를 설치할 수 없습니다.");
 
     std::process::Command::new("certutil.exe")
         .arg("-addstore")
         .arg("Root")
         .arg(path_str)
         .status()
-        .expect("Unable to install certificate in root certificate authorities.");
+        .expect("루트 인증소에 설치 할 수 없습니다.");
 }
 
 pub fn send_notify(msg: &str) {

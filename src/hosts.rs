@@ -35,12 +35,12 @@ pub fn overwrite(address: &str) -> bool {
     let mut changed_perms = false;
 
     if address.is_empty() {
-        super::utils::send_notify("Target address is empty.");
+        super::utils::send_notify("접속 주소가 비어 있습니다!");
         return false;
     }
 
     if is_connected() {
-        super::utils::send_notify("You are already connected.");
+        super::utils::send_notify("이미 접속되어 있습니다!");
         return true;
     }
 
@@ -49,16 +49,16 @@ pub fn overwrite(address: &str) -> bool {
         changed_perms = true;
     }
 
-    let full_url_str_shiro = "http://".to_owned() + super::SHIRO_IP;
+    let full_url_str_keesu = "http://".to_owned() + super::KEESU_IP;
     let full_url_str_mirror = "http://".to_owned() + super::MIRROR_IP;
 
-    let full_url_shiro: &str = full_url_str_shiro.as_str();
+    let full_url_keesu: &str = full_url_str_keesu.as_str();
     let full_url_mirror: &str = full_url_str_mirror.as_str();
 
-    let response_shiro = reqwest::get(full_url_shiro).unwrap();
+    let response_keesu = reqwest::get(full_url_keesu).unwrap();
     let response_mirror = reqwest::get(full_url_mirror).unwrap();
 
-    if !response_shiro.status().is_success() || !response_mirror.status().is_success()  {
+    if !response_keesu.status().is_success() || !response_mirror.status().is_success()  {
         super::utils::send_notify("The server or the beatmap mirror is currently offline.");
         return false;
     }
@@ -115,7 +115,7 @@ pub fn revert() -> bool {
     let mut changed_perms = false;
 
     if !is_connected() {
-        super::utils::send_notify("You are already disconnected.");
+        super::utils::send_notify("이미 접속을 해제한 상태입니다!");
         return true;
     }
 
@@ -137,7 +137,7 @@ pub fn revert() -> bool {
         }
     }
 
-    hosts.retain(|s| s != "removed by kyo-rs");
+    hosts.retain(|s| s != "removed by kyo-rs (osukeesu)");
 
     let result = hosts.join(NEW_LINE);
 
@@ -164,7 +164,7 @@ pub fn is_connected() -> bool {
             continue;
         }
 
-        if line.contains(super::SHIRO_IP) || line.contains(super::MIRROR_IP) {
+        if line.contains(super::KEESU_IP) || line.contains(super::MIRROR_IP) {
             return true;
         }
     }
