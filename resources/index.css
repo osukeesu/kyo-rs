@@ -41,7 +41,7 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
     background-size: cover;
-    background: url("img/background.jpg") center center;
+    background: url("https://osu.leu.kr/static/switcher/background.png") center center;
 }
 
 .background-overlay {
