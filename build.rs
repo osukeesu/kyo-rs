@@ -31,8 +31,8 @@ fn main() {
 
     let fixed_css = &str::replace(include_str!("resources/index.html"), r#"<link rel="stylesheet" href="index.css">"#, css.as_str());
     let fixed_js = &str::replace(fixed_css, r#"<script src="index.js"></script>"#, js.as_str());
-    let fixed_bg = &str::replace(fixed_js, r#"img/background.jpg"#, background_jpg.as_str());
-    let fixed_btn = &str::replace(fixed_bg, r#"img/button.svg"#, button_svg.as_str());
+    //let fixed_bg = &str::replace(fixed_js, r#"img/background.jpg"#, background_jpg.as_str());
+    let fixed_btn = &str::replace(fixed_js, r#"img/button.svg"#, button_svg.as_str());
 
     let mut minifier = html_minifier::HTMLMinifier::new();
     minifier.digest(fixed_btn).unwrap();
