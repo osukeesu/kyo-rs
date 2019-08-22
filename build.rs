@@ -26,7 +26,7 @@ fn main() {
     // Minify and pack frontend .html, .css and .js files (as well as backgrounds and stuff)
     let css = "<style>".to_owned() + include_str!("resources/index.css") + "</style>";
     let js = "<script>".to_owned() + include_str!("resources/index.js") + "</script>";
-    let background_jpg = "data:image/jpeg;base64,".to_owned() + include_str!("resources/img/background.jpg.base64");
+    //let background_jpg = "data:image/jpeg;base64,".to_owned() + include_str!("resources/img/background.jpg.base64");
     let button_svg = "data:image/svg+xml;base64,".to_owned() + &base64::encode(include_str!("resources/img/button.svg"));
 
     let fixed_css = &str::replace(include_str!("resources/index.html"), r#"<link rel="stylesheet" href="index.css">"#, css.as_str());
