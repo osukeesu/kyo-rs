@@ -74,7 +74,7 @@ pub fn install_cert(cert: &str) {
 
 pub fn send_notify(msg: &str) {
     Toast::new(Toast::POWERSHELL_APP_ID)
-        .title("kyo-rs")
+        .title("Keesu Server Switcher")
         .text1(msg)
         .duration(Duration::Short)
         .show()

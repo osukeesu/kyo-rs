@@ -50,7 +50,7 @@ fn install_manifest() {
     let mut res = winres::WindowsResource::new();
 
     res.set_manifest(include_str!("resources/manifest.xml"));
-    //res.set_icon("resources/icon.ico");
+    res.set_icon("resources/icon.ico");
 
     res.compile().unwrap();
 }

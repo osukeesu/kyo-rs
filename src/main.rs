@@ -36,7 +36,7 @@ use platform_utils::nix as utils;
 
 static KEESU_IP: &'static str = r#"127.0.0.1"#;
 static MIRROR_IP: &'static str = r#"127.0.0.1"#; // Won't be displayed to user but put in hosts regardless
-static CERT_URL: &'static str = r#"https://cert.leu.kr/cert.pem"#;
+static CERT_URL: &'static str = r#"https://assets.leu.kr/keesu/cert.pem"#;
 static RESULT_CERT_NAME: &'static str = r#"keesu.crt"#; // Always needs to end in .crt
 static CONTENT: &'static str = include_str!("../resources/index.include.html");
 
@@ -49,7 +49,7 @@ fn main() {
     let user_data = ();
 
     web_view::run(
-        "kyo-rs",
+        "Keesu server Switcher",
         web_view::Content::Html(CONTENT),
         Some((400, 260)),
         false,

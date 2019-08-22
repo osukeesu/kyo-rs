@@ -16,6 +16,8 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+ body {overflow:hidden}
+
 * {
     margin: 0;
     padding: 0;
@@ -41,7 +43,7 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
     background-size: cover;
-    background: url("https://osu.leu.kr/static/switcher/background.png") center center;
+    background: url("https://assets.leu.kr/keesu/switcher/background.png") center center;
 }
 
 .background-overlay {
@@ -176,7 +178,7 @@ body {
     text-align: center;
     -webkit-transition: all .12s ease-in-out;
     transition: all .12s ease-in-out;
-    width: 90%;
+    width: 100%;
     font-family: "Noto Sans", sans-serif;
     outline: none;
     border: 2px solid #fc2;
