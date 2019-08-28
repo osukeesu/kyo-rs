@@ -49,20 +49,6 @@ pub fn overwrite(address: &str) -> bool {
         changed_perms = true;
     }
 
-    let full_url_str_keesu = "http://".to_owned() + super::KEESU_IP;
-    let full_url_str_mirror = "http://".to_owned() + super::MIRROR_IP;
-
-    let full_url_keesu: &str = full_url_str_keesu.as_str();
-    let full_url_mirror: &str = full_url_str_mirror.as_str();
-
-    let response_keesu = reqwest::get(full_url_keesu).unwrap();
-    let response_mirror = reqwest::get(full_url_mirror).unwrap();
-
-    if !response_keesu.status().is_success() || !response_mirror.status().is_success()  {
-        super::utils::send_notify("The server or the beatmap mirror is currently offline.");
-        return false;
-    }
-
     // 1. Remove all other entries for ppy.sh
     // 2. Add new entry for ppy.sh
     let lines = read_file_lines(HOSTS_PATH);
@@ -74,7 +60,7 @@ pub fn overwrite(address: &str) -> bool {
         }
     }
 
-    hosts.push("# Added by kyo-rs, a modern osu! server switcher".to_owned());
+    hosts.push("# Added by kyo-rs".to_owned());
     hosts.push(format!("{} osu.ppy.sh", address));
     hosts.push(format!("{} c.ppy.sh", address));
     hosts.push(format!("{} ce.ppy.sh", address));
@@ -90,9 +76,6 @@ pub fn overwrite(address: &str) -> bool {
     hosts.push(format!("{} a.ppy.sh", address));
     hosts.push(format!("{} i.ppy.sh", address));
 
-    for i in 4..7 {
-        hosts.push(format!("{} bm{}.ppy.sh", super::MIRROR_IP, i));
-    }
 
 
     hosts.push(NEW_LINE.to_owned());
@@ -129,7 +112,7 @@ pub fn revert() -> bool {
 
     for (i, line) in lines.iter().enumerate() {
         if line.starts_with("#") && line.contains("kyo-rs") {
-            for j in i..(i + 8) {
+            for j in i..(i + 12) {
                 hosts[j] = "removed by kyo-rs".to_owned();
             }
 
