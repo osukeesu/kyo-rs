@@ -59,7 +59,6 @@ fn install_manifest() {
     res.set("LegalTrademark", "Keesu, ilsubyeega, kyo-rs (Marc3842h)");
     res.set("CompanyName", "Keesu");
     res.set("Comments", "Marc3842h/kyo-rs forked by ilsubyeega");
-    res.set("OriginalFilename", "switcher.exe");
     res.set("InternalName", "switcher.exe");
 
     res.compile().unwrap();
