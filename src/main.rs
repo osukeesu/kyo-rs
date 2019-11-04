@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
-
+#![windows_subsystem = "windows"]
 extern crate web_view;
 extern crate serde_json;
 

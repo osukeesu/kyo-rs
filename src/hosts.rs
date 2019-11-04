@@ -60,7 +60,6 @@ pub fn overwrite(address: &str) -> bool {
         }
     }
 
-    hosts.push("# Added by kyo-rs".to_owned());
     hosts.push(format!("{} osu.ppy.sh", address));
     hosts.push(format!("{} c.ppy.sh", address));
     hosts.push(format!("{} ce.ppy.sh", address));
@@ -109,16 +108,36 @@ pub fn revert() -> bool {
 
     let lines = read_file_lines(HOSTS_PATH);
     let mut hosts = lines.clone();
-
+    let mut fline = 0;
     for (i, line) in lines.iter().enumerate() {
-        if line.starts_with("#") && line.contains("kyo-rs") {
-            for j in i..(i + 12) {
-                hosts[j] = "removed by kyo-rs".to_owned();
-            }
-
-            break;
+        if line.contains("ppy.sh") {
+            fline = fline + 1;
         }
     }
+    println!("Found {} lines to edit", fline);
+    let mut done = false;
+    while !done {
+        for (i, line) in lines.iter().enumerate() {
+            if line.contains("ppy.sh") {
+                for j in i..(i + fline) {
+                    if (hosts[i].contains("ppy.sh")){
+                        println!("Removed Line: {}", j);
+                        hosts.remove(i);
+                        fline = fline - 1;
+                        if (fline == 0){
+                            done = true;
+                            break;
+                        }
+                    } else {
+                        break;
+                    }
+                }
+                break;
+            }
+        }
+    }
+
+    
 
     hosts.retain(|s| s != "removed by kyo-rs (osukeesu)");
 

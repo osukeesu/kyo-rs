@@ -16,6 +16,8 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+ @import url('https://fonts.googleapis.com/css?family=Noto+Sans+KR:300&display=swap&subset=korean');
+
  body {overflow:hidden}
 
 * {
@@ -31,7 +33,7 @@
 
 body {
     background: #222;
-    font-family: "Exo 2", sans-serif;
+    font-family: 'Noto Sans KR', sans-serif;
     user-select: none;
 }
 
@@ -172,8 +174,8 @@ body {
 }
 
 .input input {
-    border-radius: 4px;
-    background-color: rgba(0,0,0,.5);
+    border-radius: 6px;
+    background-color: rgba(0,0,0,.25);
     padding: 10px;
     text-align: center;
     -webkit-transition: all .12s ease-in-out;
@@ -183,6 +185,14 @@ body {
     outline: none;
     border: 2px solid #fc2;
     color: #fff;
+}
+
+.input input:hover {
+    background-color: rgba(0,0,0,.6);
+}
+
+.input input:active {
+    background-color: rgba(0,0,0,.6);
 }
 
 .input.shake {

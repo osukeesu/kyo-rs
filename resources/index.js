@@ -65,14 +65,14 @@ function toggleConnectButton() {
 
     // We just switched to Keesu
     if (connectButton.classList.contains("blue")) {
-        document.getElementById("text-connect").innerHTML = "Bancho에 접속하기";
+        document.getElementById("text-connect").innerHTML = "<b>Bancho</b>에 접속하기";
         document.getElementById("icon-switch").className = "fas fa-unlink";
         connectButton.onclick = connectBancho;
     }
 
     // We just switched back to Bancho
     if (connectButton.classList.contains("pink")) {
-        document.getElementById("text-connect").innerHTML = "Keesu로 접속하기";
+        document.getElementById("text-connect").innerHTML = "<b>Keesu</b>에 접속하기";
         document.getElementById("icon-switch").className = "fas fa-sync-alt";
         connectButton.onclick = connectKeesu;
     }
