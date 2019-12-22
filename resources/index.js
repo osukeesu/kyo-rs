@@ -91,4 +91,9 @@ function displayError() {
 // Init
 
 updateData();
-document.getElementById("connect-address").focus();
+var connectaddr = document.getElementById("connect-address");
+connectaddr.focus();
+
+// For known issues
+
+connectaddr.readOnly = true;
