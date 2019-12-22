@@ -31,16 +31,21 @@ static HOSTS_PATH: &'static str = r#"/etc/hosts"#;
 #[cfg(unix)]
 static NEW_LINE: &'static str = "\n";
 
+#[cfg(windows)]
+use platform_utils::win32 as utils;
+
+#[cfg(unix)]
+use platform_utils::nix as utils;
+
 pub fn overwrite(address: &str) -> bool {
     let mut changed_perms = false;
 
     if address.is_empty() {
-        super::utils::send_notify("접속 주소가 비어 있습니다!");
+        utils::send_notify("주소가 입력되어 있지 않습니다!");
         return false;
     }
 
     if is_connected() {
-        super::utils::send_notify("이미 접속되어 있습니다!");
         return true;
     }
 
@@ -55,7 +60,7 @@ pub fn overwrite(address: &str) -> bool {
     let mut hosts = lines.clone();
 
     for (i, line) in lines.iter().enumerate() {
-        if !line.starts_with("#") && line.contains("ppy.sh") {
+        if (!line.starts_with("#") && line.contains("ppy.sh")) {
             hosts[i] = "#".to_owned() + line;
         }
     }
@@ -97,7 +102,6 @@ pub fn revert() -> bool {
     let mut changed_perms = false;
 
     if !is_connected() {
-        super::utils::send_notify("이미 접속을 해제한 상태입니다!");
         return true;
     }
 
@@ -109,6 +113,7 @@ pub fn revert() -> bool {
     let lines = read_file_lines(HOSTS_PATH);
     let mut hosts = lines.clone();
     let mut fline = 0;
+    let mut fline2 = 0;
     for (i, line) in lines.iter().enumerate() {
         if line.contains("ppy.sh") {
             fline = fline + 1;
@@ -119,20 +124,16 @@ pub fn revert() -> bool {
     while !done {
         for (i, line) in lines.iter().enumerate() {
             if line.contains("ppy.sh") {
-                for j in i..(i + fline) {
-                    if (hosts[i].contains("ppy.sh")){
-                        println!("Removed Line: {}", j);
-                        hosts.remove(i);
-                        fline = fline - 1;
-                        if (fline == 0){
-                            done = true;
-                            break;
-                        }
-                    } else {
-                        break;
-                    }
+                if (i>0){
+                    hosts.remove(i-fline2);
+                } else {
+                    hosts.remove(i);
                 }
-                break;
+                fline = fline - 1;
+                fline2 = fline2 + 1;
+                if (fline == 0){
+                    done = true;
+                }
             }
         }
     }

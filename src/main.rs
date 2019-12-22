@@ -47,7 +47,6 @@ fn main() {
     }
 
     let user_data = ();
-
     web_view::run(
         "Keesu server Switcher",
         web_view::Content::Html(CONTENT),

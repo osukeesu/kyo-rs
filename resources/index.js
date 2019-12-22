@@ -87,26 +87,6 @@ function displayError() {
     }, 820);
 }
 
-// Listeners
-
-let previousValue = "";
-
-document.onkeydown = function (event) {
-    event = event || window.event;
-
-    if (event.keyCode === 17) {
-        previousValue = document.getElementById("connect-address").value;
-        document.getElementById("connect-address").value = "127.0.0.1";
-    }
-};
-
-document.onkeyup = function (event) {
-    event = event || window.event;
-
-    if (event.keyCode === 17) {
-        document.getElementById("connect-address").value = previousValue;
-    }
-};
 
 // Init
 

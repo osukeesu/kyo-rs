@@ -22,8 +22,20 @@ extern crate winapi;
 extern crate winrt;
 extern crate winrt_notification;
 
+
+use std::io::Error;
+
 use winapi::um::wincrypt::*;
 use winrt_notification::{Duration, Toast};
+
+fn to_wstring(value: &str) -> Vec<u16> {
+    use std::os::windows::ffi::OsStrExt;
+
+    std::ffi::OsStr::new(value)
+        .encode_wide()
+        .chain(std::iter::once(0))
+        .collect()
+}
 
 pub fn is_root() -> bool {
     /*unsafe {
@@ -72,11 +84,22 @@ pub fn install_cert(cert: &str) {
         .expect("루트 인증소에 설치 할 수 없습니다.");
 }
 
+// https://github.com/pachi/rust_winapi_examples/blob/master/src/bin/01_helloworld.rs
 pub fn send_notify(msg: &str) {
-    Toast::new(Toast::POWERSHELL_APP_ID)
-        .title("Keesu Server Switcher")
-        .text1(msg)
-        .duration(Duration::Short)
-        .show()
-        .unwrap();
+    use std::ptr::null_mut;
+    use winapi::um::winuser::{MessageBoxW, MB_ICONINFORMATION, MB_OK};
+
+    let lp_text = to_wstring(msg);
+    let lp_caption = to_wstring("Keesu Server Switcher");
+    let ret = unsafe {
+        MessageBoxW(
+            null_mut(),          // hWnd
+            lp_text.as_ptr(),    // text
+            lp_caption.as_ptr(), // caption (dialog box title)
+            MB_OK | MB_ICONINFORMATION,
+        )
+    };
+    if ret == 0 {
+        println!("{}", Error::last_os_error());
+    }
 }
