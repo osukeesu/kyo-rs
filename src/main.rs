@@ -34,9 +34,9 @@ use platform_utils::win32 as utils;
 #[cfg(unix)]
 use platform_utils::nix as utils;
 
-static KEESU_IP: &'static str = r#"45.32.61.151"#;
-static MIRROR_IP: &'static str = r#"45.32.61.151"#; // Won't be displayed to user but put in hosts regardless
-static CERT_URL: &'static str = r#"https://assets.leu.kr/keesu/cert.pem"#;
+static KEESU_IP: &'static str = r#"206.189.74.123"#;
+static MIRROR_IP: &'static str = r#"206.189.74.123"#; // Won't be displayed to user but put in hosts regardless
+static CERT_URL: &'static str = r#"https://osu.leu.kr/cert.pem"#;
 static RESULT_CERT_NAME: &'static str = r#"keesu.crt"#; // Always needs to end in .crt
 static CONTENT: &'static str = include_str!("../resources/index.include.html");
 
